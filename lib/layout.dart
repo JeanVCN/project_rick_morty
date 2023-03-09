@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_catalogue/api.dart';
-import 'package:movie_catalogue/widgets/main_pane.dart';
-import 'package:movie_catalogue/widgets/subheader/sub_header.dart';
-import 'package:movie_catalogue/widgets/leftpane/left_pane_widget.dart';
-import 'package:movie_catalogue/widgets/mainheader/main_header.dart';
+import 'package:project_rick_morty/api.dart';
+import 'package:project_rick_morty/widgets/main_pane.dart';
+import 'package:project_rick_morty/widgets/subheader/sub_header.dart';
+import 'package:project_rick_morty/widgets/leftpane/left_pane_widget.dart';
+import 'package:project_rick_morty/widgets/mainheader/main_header.dart';
 
 class AppLayout extends StatefulWidget {
   const AppLayout({Key? key}) : super(key: key);
@@ -18,24 +18,46 @@ class AppLayout extends StatefulWidget {
 }
 
 class _AppLayoutState extends State<AppLayout> {
+  List<Results> character = List<Results>.empty(); // Lista dos filmes
+  List<Results> episode = List<Results>.empty(); // Lista dos filmes
+  List<Results> location = List<Results>.empty(); // Lista dos filmes
   List<Results> data = List<Results>.empty(); // Lista dos filmes
-  String search = "Morty"; // Plavra chave da pesquisa
 
   // Construtor, atualiza com setState a lista de filmes.
   _AppLayoutState() {
-    API.getMovie(search).then((response) {
+    API.getCharacter().then((response) {
       setState(() {
         final body = json.decode(response.body)
             as Map<String, dynamic>; // Usamos um iterator
         final results = body["results"] as List<dynamic>;
-        data = results
+        character = results
             .map((e) => Results(e["id"], e["name"], e["species"], e["image"]))
             .toList();
       });
     });
+    API.getEpisode().then((response) {
+      setState(() {
+        final body = json.decode(response.body)
+            as Map<String, dynamic>; // Usamos um iterator
+        final results = body["results"] as List<dynamic>;
+        episode = results
+            .map(
+                (e) => Results(e["id"], e["name"], e["air_date"], e["episode"]))
+            .toList();
+      });
+    });
+    API.getLocation().then((response) {
+      setState(() {
+        final body = json.decode(response.body)
+            as Map<String, dynamic>; // Usamos um iterator
+        final results = body["results"] as List<dynamic>;
+        location = results
+            .map((e) => Results(e["id"], e["name"], e["type"], e["dimension"]))
+            .toList();
+      });
+    });
   }
-
-  int _currentPage = 4;
+  int _currentPage = 1;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_catalogue/widgets/leftpane/main_nav_item.dart';
+import 'package:project_rick_morty/widgets/leftpane/main_nav_item.dart';
 
 class LeftPane extends StatelessWidget {
   final int selected;
@@ -33,24 +33,24 @@ class LeftPane extends StatelessWidget {
             ),
             MainNavItem(
                 "Personagens",
-                Icons.emoji_people_outlined,
+                Icons.people_sharp,
+                selected == 1,
+                () => mainNavAction(
+                      1,
+                    )),
+            MainNavItem(
+                "Locais",
+                Icons.location_city,
                 selected == 2,
                 () => mainNavAction(
                       2,
                     )),
             MainNavItem(
-                "Locais",
-                Icons.verified_outlined,
+                "Episódios",
+                Icons.movie,
                 selected == 3,
                 () => mainNavAction(
                       3,
-                    )),
-            MainNavItem(
-                "Episódios",
-                Icons.verified_outlined,
-                selected == 4,
-                () => mainNavAction(
-                      4,
                     )),
           ],
         )),

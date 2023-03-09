@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_catalogue/layout.dart';
+import 'package:project_rick_morty/layout.dart';
 
 void main() {
   runApp(const ProjectRickMorty());

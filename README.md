@@ -1,4 +1,4 @@
-# movie_catalogue
+# project_rick_morty
 
 A new Flutter project.
 

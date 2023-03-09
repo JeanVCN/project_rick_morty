@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(movie_catalogue LANGUAGES CXX)
+project(project_rick_morty LANGUAGES CXX)
 
-set(BINARY_NAME "movie_catalogue")
+set(BINARY_NAME "project_rick_morty")
 
 cmake_policy(SET CMP0063 NEW)
 
@@ -62,7 +62,7 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${BUILD_BUNDLE_DIR}" CACHE PATH "..." FORCE)
 endif()
 
-set(INSTALL_BUNDLE_DATA_DIR "${CMAKE_INSTALL_PREFIX}/data")
+set(INSTALL_BUNDLE_DATA_DIR "${CMAKE_INSTALL_PREFIX}/character")
 set(INSTALL_BUNDLE_LIB_DIR "${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION "${CMAKE_INSTALL_PREFIX}"
