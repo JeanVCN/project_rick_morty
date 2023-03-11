@@ -3,46 +3,46 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:movie_catalogue/api.dart';
-import 'package:movie_catalogue/widgets/main_pane.dart';
-import 'package:movie_catalogue/widgets/subheader/sub_header.dart';
+import 'package:movie_catalogue/widgets/main_pane_location.dart';
 import 'package:movie_catalogue/widgets/leftpane/left_pane_widget.dart';
 import 'package:movie_catalogue/widgets/mainheader/main_header.dart';
 
-class AppLayout extends StatefulWidget {
-  const AppLayout({Key? key}) : super(key: key);
+class LayoutLocation extends StatefulWidget {
+  const LayoutLocation({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _AppLayoutState();
+    return _LayoutLocationState();
   }
 }
 
-class _AppLayoutState extends State<AppLayout> {
-  List<Results> data = List<Results>.empty(); // Lista dos filmes
-  String search = "Morty"; // Plavra chave da pesquisa
+class _LayoutLocationState extends State<LayoutLocation> {
+  List<ResultsLocation> data =
+      List<ResultsLocation>.empty(); // Lista dos filmes
 
   // Construtor, atualiza com setState a lista de filmes.
-  _AppLayoutState() {
-    API.getMovie(search).then((response) {
+  _LayoutLocationState() {
+    API.getLocation().then((response) {
       setState(() {
         final body = json.decode(response.body)
             as Map<String, dynamic>; // Usamos um iterator
         final results = body["results"] as List<dynamic>;
         data = results
-            .map((e) => Results(e["id"], e["name"], e["species"], e["image"]))
+            .map((e) => ResultsLocation(
+                e["name"], e["type"], e["dimension"], e["created"]))
             .toList();
       });
     });
   }
 
-  int _currentPage = 4;
+  int _currentPage = 2;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/img/bg.jpg"),
+          image: AssetImage("assets/img/bgLocation.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -55,7 +55,6 @@ class _AppLayoutState extends State<AppLayout> {
             Container(
               width: 300,
               child: LeftPane(
-                mainNavAction: menuAction,
                 selected: _currentPage,
               ),
               color: const Color(0xFF253089).withOpacity(0.85),
@@ -70,16 +69,10 @@ class _AppLayoutState extends State<AppLayout> {
                     color: Colors.indigo.withOpacity(0.80),
                     child: MainHeader(),
                   ),
-                  // Sub header with sort and filter
-                  Container(
-                    height: 120,
-                    color: Colors.deepPurple.withOpacity(0.60),
-                    child: SubHeader(),
-                  ),
                   //Main Pane
                   Expanded(
                     child: Center(
-                        child: MainPane(
+                        child: MainPaneLocation(
                       data: data,
                     )),
                   )
@@ -90,12 +83,5 @@ class _AppLayoutState extends State<AppLayout> {
         ),
       ),
     );
-  }
-
-  void menuAction(int page, List<Results> data) {
-    setState(() {
-      _currentPage = page;
-      this.data = data;
-    });
   }
 }
