@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project_rick_morty/widgets/leftpane/main_nav_item.dart';
+import 'package:movie_catalogue/widgets/leftpane/main_nav_item.dart';
+import 'package:movie_catalogue/layout_character.dart';
 
 class LeftPane extends StatelessWidget {
   final int selected;
-  final Function mainNavAction;
 
-  const LeftPane(
-      {Key? key, required this.selected, required this.mainNavAction})
-      : super(key: key);
+  const LeftPane({
+    Key? key,
+    required this.selected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,24 +34,42 @@ class LeftPane extends StatelessWidget {
             ),
             MainNavItem(
                 "Personagens",
-                Icons.people_sharp,
+                Icons.emoji_people_outlined,
                 selected == 1,
-                () => mainNavAction(
-                      1,
+                () => MaterialApp(
+                      title: 'Rick And Morty',
+                      theme: ThemeData(
+                        primarySwatch: Colors.blue,
+                      ),
+                      home: const Scaffold(
+                        body: LayoutCharacter(),
+                      ),
                     )),
             MainNavItem(
                 "Locais",
-                Icons.location_city,
+                Icons.verified_outlined,
                 selected == 2,
-                () => mainNavAction(
-                      2,
+                () => MaterialApp(
+                      title: 'Rick And Morty',
+                      theme: ThemeData(
+                        primarySwatch: Colors.blue,
+                      ),
+                      home: const Scaffold(
+                        body: LayoutCharacter(),
+                      ),
                     )),
             MainNavItem(
                 "Episódios",
-                Icons.movie,
+                Icons.verified_outlined,
                 selected == 3,
-                () => mainNavAction(
-                      3,
+                () => MaterialApp(
+                      title: 'Rick And Morty',
+                      theme: ThemeData(
+                        primarySwatch: Colors.blue,
+                      ),
+                      home: const Scaffold(
+                        body: LayoutCharacter(),
+                      ),
                     )),
           ],
         )),

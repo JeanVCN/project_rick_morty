@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_rick_morty/layout.dart';
+import 'package:movie_catalogue/layout_character.dart';
+import 'package:movie_catalogue/layout_location.dart';
 
 void main() {
   runApp(const ProjectRickMorty());
@@ -16,7 +17,7 @@ class ProjectRickMorty extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Scaffold(
-        body: AppLayout(),
+        body: LayoutLocation(),
       ),
     );
   }

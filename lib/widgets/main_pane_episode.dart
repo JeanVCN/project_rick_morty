@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../api.dart';
 
-class MainPane extends StatelessWidget {
-  final List<Results> data;
+class MainPaneEpisode extends StatelessWidget {
+  final List<ResultsCharacter> data;
 
-  const MainPane({Key? key, required this.data}) : super(key: key);
+  const MainPaneEpisode({Key? key, required this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GridView.builder(

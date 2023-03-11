@@ -1,4 +1,4 @@
-package com.example.project_rick_morty
+package com.example.movie_catalogue
 
 import io.flutter.embedding.android.FlutterActivity
 
