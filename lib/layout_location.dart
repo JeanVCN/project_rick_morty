@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_catalogue/api.dart';
-import 'package:movie_catalogue/widgets/main_pane_location.dart';
-import 'package:movie_catalogue/widgets/leftpane/left_pane_widget.dart';
-import 'package:movie_catalogue/widgets/mainheader/main_header.dart';
+import 'package:project_rick_morty/api.dart';
+import 'package:project_rick_morty/widgets/main_pane_location.dart';
+import 'package:project_rick_morty/widgets/leftpane/left_pane_widget.dart';
+import 'package:project_rick_morty/widgets/mainheader/main_header.dart';
+import 'package:project_rick_morty/layout_character.dart';
 
 class LayoutLocation extends StatefulWidget {
   const LayoutLocation({Key? key}) : super(key: key);
@@ -35,8 +36,6 @@ class _LayoutLocationState extends State<LayoutLocation> {
     });
   }
 
-  int _currentPage = 2;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -54,9 +53,7 @@ class _LayoutLocationState extends State<LayoutLocation> {
             //left pane
             Container(
               width: 300,
-              child: LeftPane(
-                selected: _currentPage,
-              ),
+              child: LeftPane(),
               color: const Color(0xFF253089).withOpacity(0.85),
             ),
             //

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(movie_catalogue LANGUAGES CXX)
+project(project_rick_morty LANGUAGES CXX)
 
-set(BINARY_NAME "movie_catalogue")
+set(BINARY_NAME "project_rick_morty")
 
 cmake_policy(SET CMP0063 NEW)
 

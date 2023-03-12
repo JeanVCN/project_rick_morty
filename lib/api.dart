@@ -1,9 +1,9 @@
 import 'package:http/http.dart' as http;
 
 // A URL da API
-const baseUrlCharacter =
-    "https://rickandmortyapi.com/api/character/?name=Morty Smith";
+const baseUrlCharacter = "https://rickandmortyapi.com/api/character/";
 const baseUrlLocation = "https://rickandmortyapi.com/api/location/";
+const baseUrlEpisode = "https://rickandmortyapi.com/api/episode/";
 
 // Criamos a classe da nossa API. O nome você que escolhe. Fazemos aqui
 // uma requisição get (como fizemos no react) e passamos a URL, mas usamos
@@ -16,6 +16,11 @@ class API {
 
   static Future getLocation() async {
     var url = baseUrlLocation;
+    return await http.get(Uri.parse(url));
+  }
+
+  static Future getEpisode() async {
+    var url = baseUrlEpisode;
     return await http.get(Uri.parse(url));
   }
 }
@@ -39,4 +44,13 @@ class ResultsLocation {
   String created;
 
   ResultsLocation(this.name, this.type, this.dimension, this.created);
+}
+
+class ResultsEpsiode {
+  String name;
+  String airDate;
+  String episode;
+  String created;
+
+  ResultsEpsiode(this.name, this.airDate, this.episode, this.created);
 }

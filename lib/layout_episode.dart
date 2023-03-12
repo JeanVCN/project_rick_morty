@@ -2,47 +2,45 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_catalogue/api.dart';
-import 'package:movie_catalogue/widgets/main_pane_episode.dart';
-import 'package:movie_catalogue/widgets/leftpane/left_pane_widget.dart';
-import 'package:movie_catalogue/widgets/mainheader/main_header.dart';
+import 'package:project_rick_morty/api.dart';
+import 'package:project_rick_morty/widgets/main_pane_episode.dart';
+import 'package:project_rick_morty/widgets/leftpane/left_pane_widget.dart';
+import 'package:project_rick_morty/widgets/mainheader/main_header.dart';
+import 'package:project_rick_morty/layout_character.dart';
 
-class LayoutCharacter extends StatefulWidget {
-  const LayoutCharacter({Key? key}) : super(key: key);
+class LayoutEpisode extends StatefulWidget {
+  const LayoutEpisode({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _LayoutCharacterState();
+    return _LayoutEpisodeState();
   }
 }
 
-class _LayoutCharacterState extends State<LayoutCharacter> {
-  List<ResultsCharacter> data =
-      List<ResultsCharacter>.empty(); // Lista dos filmes
+class _LayoutEpisodeState extends State<LayoutEpisode> {
+  List<ResultsEpsiode> data = List<ResultsEpsiode>.empty(); // Lista dos filmes
 
   // Construtor, atualiza com setState a lista de filmes.
-  _LayoutCharacterState() {
-    API.getCharacter().then((response) {
+  _LayoutEpisodeState() {
+    API.getEpisode().then((response) {
       setState(() {
         final body = json.decode(response.body)
             as Map<String, dynamic>; // Usamos um iterator
         final results = body["results"] as List<dynamic>;
         data = results
-            .map((e) =>
-                ResultsCharacter(e["id"], e["name"], e["species"], e["image"]))
+            .map((e) => ResultsEpsiode(
+                e["name"], e["air_date"], e["episode"], e["created"]))
             .toList();
       });
     });
   }
-
-  int _currentPage = 4;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/img/bg.jpg"),
+          image: AssetImage("assets/img/bgEpisode.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -54,9 +52,7 @@ class _LayoutCharacterState extends State<LayoutCharacter> {
             //left pane
             Container(
               width: 300,
-              child: LeftPane(
-                selected: _currentPage,
-              ),
+              child: LeftPane(),
               color: const Color(0xFF253089).withOpacity(0.85),
             ),
             //

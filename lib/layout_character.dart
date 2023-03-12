@@ -2,10 +2,14 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_catalogue/api.dart';
-import 'package:movie_catalogue/widgets/main_pane_character.dart';
-import 'package:movie_catalogue/widgets/leftpane/left_pane_widget.dart';
-import 'package:movie_catalogue/widgets/mainheader/main_header.dart';
+import 'package:project_rick_morty/api.dart';
+import 'package:project_rick_morty/widgets/main_pane_character.dart';
+import 'package:project_rick_morty/widgets/leftpane/left_pane_widget.dart';
+import 'package:project_rick_morty/widgets/mainheader/main_header.dart';
+
+import 'package:project_rick_morty/layout_character.dart';
+import 'package:project_rick_morty/layout_location.dart';
+import 'package:project_rick_morty/layout_episode.dart';
 
 class LayoutCharacter extends StatefulWidget {
   const LayoutCharacter({Key? key}) : super(key: key);
@@ -34,8 +38,11 @@ class _LayoutCharacterState extends State<LayoutCharacter> {
       });
     });
   }
-
-  int _currentPage = 4;
+  final List<Widget> _screens = [
+    LayoutLocation(),
+    LayoutCharacter(),
+    LayoutEpisode(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +61,7 @@ class _LayoutCharacterState extends State<LayoutCharacter> {
             //left pane
             Container(
               width: 300,
-              child: LeftPane(
-                selected: _currentPage,
-              ),
+              child: LeftPane(),
               color: const Color(0xFF253089).withOpacity(0.85),
             ),
             //
@@ -84,12 +89,5 @@ class _LayoutCharacterState extends State<LayoutCharacter> {
         ),
       ),
     );
-  }
-
-  void menuAction(int page, List<ResultsCharacter> data) {
-    setState(() {
-      _currentPage = page;
-      this.data = data;
-    });
   }
 }
